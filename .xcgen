@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+xcodegen generate --spec project.xcodeprojless
+open VitaTrack.xcodeproj

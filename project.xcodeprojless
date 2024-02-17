@@ -1,0 +1,525 @@
+{
+    "configFiles":
+    {},
+    "configs":
+    {
+        "Debug": "debug",
+        "Release": "release"
+    },
+    "options":
+    {
+        "groupOrdering":
+        [
+            {
+                "order":
+                [
+                    "Application",
+                    "NotificationService"
+                ]
+            }
+        ],
+        "deploymentTarget":
+        {
+            "iOS": "17.0"
+        },
+        "groupSortPosition": "top",
+        "tabWidth": 4,
+        "indentWidth": 4,
+        "defaultConfig": "Release"
+    },
+    "packages":
+    {
+        "remote-darwin-relux":
+        {
+            "url": "git@github.com:ivalx1s/darwin-relux.git",
+            "version": "0.1.2"
+        },
+    "remote-swift-algorithms":
+        {
+            "url": "https://github.com/apple/swift-algorithms.git",
+            "version": "1.0.0"
+        },
+        "remote-swift-collections":
+        {
+            "url": "https://github.com/apple/swift-collections.git",
+            "revision": "ceab2a560af75361d0f6ca01a15ad58174daf77e"
+        },
+        "remote-swinject":
+        {
+            "version": "2.8.3",
+            "url": "https://github.com/Swinject/Swinject.git"
+        }
+  },
+    "schemes":
+    {
+        "app-ios":
+        {
+            "build":
+            {
+                "targets":
+                {
+                    "app-ios": "all"
+                }
+            },
+            "run":
+            {
+                "config": "Debug",
+                "storeKitConfiguration": "/Application/Meta/Items.storekit",
+                "commandLineArguments":
+                {}
+            },
+            "test":
+            {
+                "config": "Release",
+                "commandLineArguments":
+                {
+                    "-FIRAnalyticsDebugEnabled": "YES",
+                    "-FIRDebugDisabled": "YES"
+                },
+                "gatherCoverageData": true,
+                "targets":
+                [
+                    {
+                        "name": "app-ios-unittest",
+                        "parallelizable": false,
+                        "randomExecutionOrder": true
+                    }
+                ]
+            },
+            "profile":
+            {
+                "config": "Release"
+            },
+            "analyze":
+            {
+                "config": "Release"
+            },
+            "archive":
+            {
+                "config": "Release",
+                "postActions":
+                [
+                    {
+                        "script": "# Do all of the work in a subdirectory of /tmp, and use a\n# unique ID so that there's no collision with previous builds.\n\n#EXPORT_UUID=`uuidgen`\n#EXPORT_PATH=\"/tmp/$PRODUCT_NAME-$EXPORT_UUID/\"\n\n#mkdir -p \"$EXPORT_PATH\"\n\n# Xcode doesn't show run script errors in build log.\n#exec > \"$EXPORT_PATH/Xcode run script.log\" 2>&1\n\n# Use osascript(1) to present notification banners; otherwise\n# there's no progress indication until the script finishes.\n#/usr/bin/osascript -e 'display notification \"...\" with title \"Exporting application archive…\"'\n\n# Ask xcodebuild(1) to export the app. Use the export options\n# from a previous manual export that used a Developer ID.\n#/usr/bin/xcodebuild -exportArchive -archivePath \"$ARCHIVE_PATH\" -exportOptionsPlist \"$SRCROOT/exportOptionsDev.plist\" -exportPath \"$EXPORT_PATH\"\n\n# Open the folder that was created, which also signals completion.\n#open \"$EXPORT_PATH\"",
+                        "name": "export_ipa",
+                        "settingsTarget": "app-ios"
+                    }
+                ],
+                "revealArchiveInOrganizer": true,
+                "customArchiveName": "VitaTrackApp-iOS-Release"
+            }
+        },
+        "app-ios-notification-service":
+        {
+            "build":
+            {
+                "targets":
+                {
+                    "app-ios": "all",
+                    "app-ios-notification-service": "all"
+                }
+            },
+            "run":
+            {
+                "config": "Debug",
+                "storeKitConfiguration": "/Application/Meta/Items.storekit",
+                "commandLineArguments":
+                {}
+            },
+            "test":
+            {
+                "config": "Release",
+                "commandLineArguments":
+                {
+                    "-FIRAnalyticsDebugEnabled": "YES",
+                    "-FIRDebugDisabled": "YES"
+                },
+                "gatherCoverageData": true,
+                "targets":
+                []
+            },
+            "profile":
+            {
+                "config": "Release"
+            },
+            "analyze":
+            {
+                "config": "Release"
+            },
+            "archive":
+            {
+                "config": "Release",
+                "postActions":
+                [
+                    {
+                        "script": "# Do all of the work in a subdirectory of /tmp, and use a\n# unique ID so that there's no collision with previous builds.\n\n#EXPORT_UUID=`uuidgen`\n#EXPORT_PATH=\"/tmp/$PRODUCT_NAME-$EXPORT_UUID/\"\n\n#mkdir -p \"$EXPORT_PATH\"\n\n# Xcode doesn't show run script errors in build log.\n#exec > \"$EXPORT_PATH/Xcode run script.log\" 2>&1\n\n# Use osascript(1) to present notification banners; otherwise\n# there's no progress indication until the script finishes.\n#/usr/bin/osascript -e 'display notification \"...\" with title \"Exporting application archive…\"'\n\n# Ask xcodebuild(1) to export the app. Use the export options\n# from a previous manual export that used a Developer ID.\n#/usr/bin/xcodebuild -exportArchive -archivePath \"$ARCHIVE_PATH\" -exportOptionsPlist \"$SRCROOT/exportOptionsDev.plist\" -exportPath \"$EXPORT_PATH\"\n\n# Open the folder that was created, which also signals completion.\n#open \"$EXPORT_PATH\"",
+                        "name": "export_ipa",
+                        "settingsTarget": "app-ios"
+                    }
+                ],
+                "revealArchiveInOrganizer": true,
+                "customArchiveName": "VitaTrackApp-iOS-Release"
+            }
+        }
+    },
+    "settingGroups":
+    {
+        "linkerSettings":
+        {
+            "OTHER_LDFLAGS": "-lstdc++ -ObjC"
+        },
+        "compilerSettings":
+        {
+            "CLANG_CXX_LANGUAGE_STANDARD": "c++17"
+        },
+        "localizationSettings":
+        {
+            "SWIFT_EMIT_LOC_STRINGS": "YES",
+            "CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED": "YES"
+        },
+        "versioningSettings":
+        {
+            "MARKETING_VERSION": "0.0.1",
+            "CURRENT_PROJECT_VERSION": "1"
+        },
+        "baseSettings":
+        {}
+    },
+    "settings":
+    {
+        "base":
+        {
+            "PROJECT_BUNDLE_ID_PREFIX": "io.vitatrack",
+            "GENERATE_INFOPLIST_FILE": "YES",
+            "OWNER_NAME": "SERENITY CYBER SECURITY, LLC",
+            "CODE_SIGN_STYLE": "Automatic",
+            "SUPPORTS_MACCATALYST": "NO",
+            "SWIFT_VERSION": "5.7",
+            "TARGETED_DEVICE_FAMILY": "1",
+            "DEVELOPMENT_TEAM": "ZT99HMCUW5"
+        }
+    },
+    "targets":
+    {
+        "app-ios":
+        {
+            "buildToolPlugins": [
+        ],
+      "dependencies":
+            [
+      {
+          "target": "app-ios-notification-service"
+        },
+        {
+          "package": "remote-swinject",
+          "product": "Swinject"
+        },
+        {
+          "package": "remote-swift-algorithms",
+          "product": "Algorithms"
+        },
+        {
+          "package": "remote-swift-collections",
+          "product": "SortedCollections"
+        },
+        {
+          "package": "remote-swift-collections",
+          "product": "Collections"
+        },
+        {
+          "package": "remote-darwin-relux",
+          "product": "Relux"
+        }
+      ],
+            "deploymentTarget":
+            "17.0",
+            "entitlements":
+            {
+                "path": "app-ios.entitlements",
+        "properties": {
+          "aps-environment": "production",
+          "com.apple.security.application-groups": [
+          ],
+          "com.apple.developer.networking.vpn.api": [
+          ]
+        }
+      },
+            "info":
+            {
+                "path": "Application/Meta/Info.plist",
+        "properties": {
+          "UIApplicationSceneManifest": {
+            "UIApplicationSupportsMultipleScenes": false,
+            "UISceneConfigurations": {
+            }
+          },
+          "CFBundleURLTypes": [
+            {
+              "CFBundleURLSchemes": [
+                "io.vitatrack"
+              ],
+              "CFBundleTypeRole": "Editor"
+            }
+          ],
+          "FirebaseAppDelegateProxyEnabled": true,
+          "UIBackgroundModes": [
+            "fetch",
+            "remote-notification"
+          ],
+          "CFBundleAllowMixedLocalizations": true,
+          "NSCameraUsageDescription": "Предоставьте доступ к камере, чтоб приложение могло с ней взаимодействовать",
+          "NSPhotoLibraryAddUsageDescription": "Предоставьте доступ к галерее, чтоб приложение могло с ней взаимодействовать",
+          "NSPhotoLibraryUsageDescription": "Предоставьте доступ к галерее, чтоб приложение могло отобразить сделанные ранее фотографии",
+          "DTPlatformName": "iphoneos",
+          "DTPlatformVersion": "17.0",
+          "ITSAppUsesNonExemptEncryption": "NO",
+          "LSRequiresIPhoneOS": "YES",
+          "DTSDKName": "iphoneos17.0",
+          "CFBundlePackageType": "$(PRODUCT_BUNDLE_PACKAGE_TYPE)",
+          "CFBundleDevelopmentRegion": "$(DEVELOPMENT_LANGUAGE)",
+          "UIApplicationSupportsIndirectInputEvents": "YES",
+          "CFBundleInfoDictionaryVersion": "6.0",
+          "CFBundleSupportedPlatforms": [
+            "iPhoneOS"
+          ],
+          "NSFaceIDUsageDescription": "If you want the app to login via faceID you have to allow it first",
+          "CFBundleShortVersionString": "$(MARKETING_VERSION)",
+          "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
+          "CFBundleDisplayName": "Kids",
+          "UILaunchScreen": {
+          },
+          "UIUserInterfaceStyle": "Dark",
+          "UISupportedInterfaceOrientations": [
+            "UIInterfaceOrientationPortrait"
+          ],
+          "NSAppTransportSecurity": {
+            "NSAllowsArbitraryLoads": false,
+            "NSAllowsArbitraryLoadsForMedia": false,
+            "NSAllowsArbitraryLoadsInWebContent": false,
+            "NSAllowsLocalNetworking": false,
+            "NSPinnedDomains": {
+            },
+            "NSExceptionDomains": {
+            }
+          },
+          "NSContactsUsageDescription": "Для менеджмента профилей, предоставьте, пожалуйста, доступ к контактам",
+          "LSApplicationQueriesSchemes": [
+            "bank100000000111",
+            "bank100000000004",
+            "bank100000000005",
+            "bank100000000008",
+            "bank100000000007",
+            "bank100000000015",
+            "bank100000000001",
+            "bank100000000010",
+            "bank100000000013",
+            "bank100000000012",
+            "bank100000000020",
+            "bank100000000025",
+            "bank100000000030",
+            "bank100000000003",
+            "bank100000000043",
+            "bank100000000028",
+            "bank100000000086",
+            "bank100000000011",
+            "bank100000000044",
+            "bank100000000054",
+            "bank100000000049",
+            "bank100000000500",
+            "bank100000000095",
+            "bank100000000900",
+            "bank100000000056",
+            "bank100000000053",
+            "bank100000000121",
+            "bank100000000082",
+            "bank100000000127",
+            "bank100000000017",
+            "bank100000000087",
+            "bank100000000052",
+            "bank100000000006",
+            "bank100000000098",
+            "bank100000000092",
+            "bank100000000229",
+            "bank100000000027",
+            "bank100000000080",
+            "bank100000000122",
+            "bank100000000124",
+            "bank100000000118",
+            "bank100000000159",
+            "bank100000000146",
+            "bank100000000069",
+            "bank100000000140",
+            "bank100000000047",
+            "bank100000000099",
+            "bank100000000135",
+            "bank100000000139",
+            "bank100000000166"
+          ]
+        }
+      },
+            "platform": "iOS",
+            "preBuildScripts": [
+        {
+          "name": "SwiftLint Prebuild Script",
+          "path": "scripts/prebild-script_swiftlint.sh"
+        }
+      ],
+            "scheme": {
+        "testTargets": [
+          "app-ios-unittest"
+        ]
+      },
+            "settings":
+            {
+                "base": {
+          "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon$(TARGET_BUNDLE_ID_CONFIGURATION_SUFFIX)",
+          "CODE_SIGN_IDENTITY": "Apple Development",
+          "DEVELOPMENT_ASSET_PATHS": "Application/Resources/Assets.xcassets",
+          "ENABLE_BITCODE": "NO",
+          "HEADER_SEARCH_PATHS": "\"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources\"",
+          "PRODUCT_BUNDLE_IDENTIFIER": "$(PROJECT_BUNDLE_ID_PREFIX).$(TARGET_BUNDLE_ID_SUFFIX)$(TARGET_BUNDLE_ID_CONFIGURATION_SUFFIX)",
+          "PRODUCT_MODULE_NAME": "$(PRODUCT_NAME_BASE)",
+          "PRODUCT_NAME": "$(PRODUCT_NAME_BASE)$(TARGET_BUNDLE_ID_CONFIGURATION_SUFFIX)",
+          "PRODUCT_NAME_BASE": "VitaTrack",
+          "SKIP_INSTALL": "NO",
+          "TARGET_BUNDLE_ID_SUFFIX": "ios.app",
+          "TARGETED_DEVICE_FAMILY": "1"
+        },
+        "configs": {
+          "Release": {
+            "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "PROD USE_RPPG",
+            "TARGET_BUNDLE_ID_CONFIGURATION_SUFFIX": ""
+          },
+          "Debug": {
+            "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "DEBUG DEV USE_RPPG",
+            "TARGET_BUNDLE_ID_CONFIGURATION_SUFFIX": ""
+          }
+        },
+        "groups": [
+          "compilerSettings",
+          "linkerSettings",
+          "localizationSettings",
+          "versioningSettings",
+          "baseSettings"
+        ]
+      },
+            "sources":
+            [
+                "Application",
+        "Shared"
+      ],
+            "type":
+            "application"
+    },
+        "app-ios-unittest":
+        {
+            "settings":
+            {
+                "base":
+                {
+                    "ENABLE_BITCODE": "NO",
+                    "TEST_HOST": "$(BUILT_PRODUCTS_DIR)/VitaTrack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VitaTrack"
+                },
+                "groups":
+                [
+                    "compilerSettings",
+                    "linkerSettings"
+                ]
+            },
+            "type": "bundle.unit-test",
+            "platform": "iOS",
+            "sources":
+            [
+                "AppUnitTests"
+            ],
+            "dependencies":
+            [
+                {
+                    "target": "app-ios"
+                }
+      ]
+        },
+        "app-ios-notification-service":
+        {
+            "entitlements":
+            {
+                "path": "app-ios-ns.entitlements",
+                "properties":
+                {
+                    "aps-environment": "production",
+                    "com.apple.security.application-groups":
+                    [
+          ]
+                }
+            },
+            "type": "app-extension",
+            "platform": "iOS",
+            "deploymentTarget": "17.0",
+            "sources":
+            [
+                "NotificationService",
+                "Shared"
+            ],
+            "dependencies":
+            [
+                {
+                    "package": "remote-swinject",
+                    "product": "Swinject"
+                },
+        {
+                    "package": "remote-swift-algorithms",
+                    "product": "Algorithms"
+                },
+                {
+                    "package": "remote-swift-collections",
+                    "product": "SortedCollections"
+                },
+                {
+                    "package": "remote-swift-collections",
+                    "product": "Collections"
+                }
+      ],
+            "settings":
+            {
+                "groups":
+                [
+                    "versioningSettings"
+                ],
+                "base":
+                {
+                    "PARENT_APP_BUNDLE_IDENTIFIER_SUFFIX": "ios.app",
+                    "PARENT_APP_BUNDLE_IDENTIFIER": "$(PROJECT_BUNDLE_ID_PREFIX).$(PARENT_APP_BUNDLE_IDENTIFIER_SUFFIX)$(TARGET_BUNDLE_ID_CONFIGURATION_SUFFIX)",
+                    "TARGET_BUNDLE_ID_SUFFIX": "ns",
+                    "HEADER_SEARCH_PATHS": "\"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources\"",
+                    "CODE_SIGN_IDENTITY": "Apple Development",
+                    "PRODUCT_BUNDLE_IDENTIFIER": "$(PARENT_APP_BUNDLE_IDENTIFIER).$(TARGET_BUNDLE_ID_SUFFIX)",
+                    "TARGETED_DEVICE_FAMILY": "1"
+                }
+            },
+            "info":
+            {
+                "path": "NotificationService/Meta/Info.plist",
+                "properties":
+                {
+                    "CFBundleSupportedPlatforms":
+                    [
+                        "iPhoneOS"
+                    ],
+                    "CFBundlePackageType": "$(PRODUCT_BUNDLE_PACKAGE_TYPE)",
+                    "CFBundleName": "$(PRODUCT_NAME)",
+                    "CFBundleDisplayName": "VitaTrack NS",
+                    "CFBundleInfoDictionaryVersion": "6.0",
+                    "CFBundleDevelopmentRegion": "$(DEVELOPMENT_LANGUAGE)",
+                    "CFBundleShortVersionString": "$(MARKETING_VERSION)",
+                    "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
+                    "NSExtension":
+                    {
+                        "NSExtensionPrincipalClass": "$(PRODUCT_MODULE_NAME).NotificationService",
+                        "NSExtensionPointIdentifier": "com.apple.usernotifications.service"
+                    }
+                }
+            }
+        }
+    },
+    "name": "VitaTrack"
+}
